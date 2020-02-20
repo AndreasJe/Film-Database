@@ -195,7 +195,7 @@
           let klon = template.cloneNode(true).content;
 
           klon.querySelector("#film").textContent = produkt.gsx$titel.$t;
-          klon.querySelector("#detalje img").src = "/img/" + produkt.gsx$cover.$t + "/plakat.jpg";
+          klon.querySelector("img").src = "/img/" + produkt.gsx$cover.$t + "/plakat.jpg";
           klon.querySelector("img").alt += produkt.gsx$titel.$t;
           klon.querySelector("#produkt").addEventListener("click", () => visDetalje(produkt));
           container.appendChild(klon);
