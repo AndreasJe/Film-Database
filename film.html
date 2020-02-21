@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>titel-database med mad indtil videre</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    img {
+      width: 100%;
+      object-fit: cover;
+    }
+
+    body {
+      background-color: #2E2E2E;
+      margin: 0;
+    }
+
+    header {
+      top: 0;
+      width: 100vw;
+      height: 60px;
+      background-color: #525252;
+    }
+
+    footer {
+      width: 100vw;
+      height: 60px;
+      background-color: #525252;
+      display: flex;
+      justify-content: center;
+    }
+
+    .top {
+
+      height: 30px;
+      width: 30%;
+      text-transform: uppercase;
+      color: white;
+      background-color: transparent;
+      border: none;
+      margin-top: 15px;
+      margin-bottom: 15px;
+    }
+
+    #overskrift {
+      color: white;
+    }
+
+
+    .data-container {
+      break-inside: avoid;
+      margin-left: 23vw;
+      width: 70%;
+      padding: 10px;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      /* Media Queries på min værdi: UWHD og UHD: 450px || Laptop og TV: 250px || Tablet og Telefon: 100-200px,  */
+      grid-gap: 10px;
+    }
+
+    /* MENU STYLING */
+
+    .menu {
+      height: 100vh;
+      width: 18%;
+      position: fixed;
+      z-index: 1;
+      top: 0;
+      left: 0;
+      background-color: #525252;
+      padding-top: 60px;
+      padding-left: 10px;
+    }
+
+    .menu button {
+      background-color: transparent;
+      text-transform: uppercase;
+      display: block;
+      padding: 10px;
+      border: none;
+      text-decoration: none;
+      font-size: 1.5rem;
+      /* Media Queries på Font-size. vw på desktop< og vh på tablet> plejer at virke meget godt. */
+    }
+
+    .menu button:hover {
+      opacity: 40%;
+    }
+
+    .valgt {
+      color: #F4484B !important;
+      /* Klassen blev overridded, så der er lagt Important på indtil videre. */
+
+    }
+
+    .filter {
+      color: white;
+      height: 30px;
+      width: 100%;
+      font-weight: bold;
+    }
+
+    .gap {
+      margin-top: 50px;
+    }
+
+
+
+    /* ARTICLE STYLING */
+
+    article {
+      background: #1F1F1F;
+      margin: auto;
+      width: 100%;
+      height: 100%;
+    }
+
+    #produkt {
+      margin: auto;
+      padding: 0.8em;
+      background-color: transparent;
+      top: 50%;
+    }
+
+    /* POPUP STYLING */
+    #detalje {
+      position: fixed;
+      width: 100vw;
+      height: 100vh;
+      background-color: hsla(282, 14%, 12%, 0.74);
+      top: 0;
+      left: 0;
+    }
+
+
+    #detalje .luk {
+      position: fixed;
+      top: 0;
+      right: 0;
+      font-size: 2rem;
+    }
+
+    #detalje #produkt {
+      background: #ececec;
+      width: 60vw;
+      min-height: 50vh;
+      margin: 4rem auto;
+      padding: 4rem;
+      background: white;
+    }
+
+    .skjul {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+  <nav>
+    <div class="menu">
+      <button class="filter valgt" data-genre="alle">Alle</button>
+      <button class="filter gap" data-genre="dokumentar">Dokumentar</button>
+      <button class="filter" data-genre="gyser">Gyser</button>
+      <button class="filter" data-genre="komedier">Komedier</button>
+      <button class="filter gap" data-genre="pitter">Brad Pitter</button>
+      <button class="filter" data-genre="erotik">Erotik</button>
+      <button class="filter" data-genre="cluster">Clusterfucks</button>
+    </div>
+  </nav>
+
+
+
+  <header></header>
+
+  <h1 id="overskrift">Alle</h1>
+
+  <section class="data-container"></section>
+
+
+
+
+  <template>
+    <article id="produkt">
+      <img src="" alt="">
+    </article>
+  </template>
+
+
+  <section id="detalje" class="skjul">
+    <button class="luk">X</button>
+    <article id="produkt">
+      <h2 id="popup-film"></h2>
+      <img src="" alt="">
+      <p id="popup-kort">
+      </p>
+      <p id="popup-skuespillere"></p>
+      <p id="popup-rating"></p>
+      <p id="popup-spilletid"></p>
+      <p id="popup-produktion"></p>
+      <p id="popup-instruktør"> </p>
+      <p id="popup-op"> </p>
+    </article>
+  </section>
+
+  <footer>
+    <button class="top">til toppen</button>
+  </footer>
+
+  <script>
+    const container = document.querySelector(".data-container");
+    const template = document.querySelector("template");
+    const detalje = document.querySelector("#detalje");
+    let produkter;
+    let allefilm = [];
+    let filter = "alle";
+
+    const id = "1m9ddpu_jXgZ2MrUp_d2JgQTWyonYcKFc9W1rdv1TdKQ";
+    const url = "https://spreadsheets.google.com/feeds/list/" + id + "/1/public/values?alt=json"
+
+    console.log(url)
+    document.addEventListener("DOMContentLoaded", getJson);
+
+
+    async function getJson() {
+
+      const jsonData = await fetch(url);
+      produkter = await jsonData.json();
+      visRetter();
+      addEventListenersToButtons();
+    }
+
+    function visRetter() {
+      container.innerHTML = "";
+      antal = produkter.feed.entry.length;
+
+      produkter.feed.entry.forEach(produkt => {
+        if (filter == "alle" || filter == produkt.gsx$genre.$t) {
+          let klon = template.cloneNode(true).content;
+
+          klon.querySelector("img").src = "img/" + produkt.gsx$cover.$t + "/plakat.jpg";
+          klon.querySelector("img").alt += produkt.gsx$titel.$t;
+          klon.querySelector("#produkt").addEventListener("click", () => visDetalje(produkt));
+          container.appendChild(klon);
+        }
+      })
+    }
+
+
+
+    function addEventListenersToButtons() {
+      document.querySelectorAll(".filter").forEach(elm => {
+        elm.addEventListener("click", filtrering);
+      })
+    }
+
+
+    function filtrering() {
+      filter = this.dataset.genre;
+      document.querySelector("h1").textContent = this.textContent;
+      document.querySelectorAll(".filter").forEach(elm => {
+        elm.classList.remove("valgt");
+      })
+      this.classList.add("valgt")
+      visRetter();
+      console.log("Filtreres efter Genren;", filter);
+
+    }
+
+    function visDetalje(produkt) {
+      const klon = template.cloneNode(true).content;
+      detalje.classList.remove("skjul");
+      detalje.querySelector(".luk").addEventListener("click", () => detalje.classList.add("skjul"));
+
+
+      console.log("Viser pop-up for", produkt.gsx$titel.$t)
+
+      document.querySelector("#detalje #popup-film").textContent = produkt.gsx$titel.$t;
+      document.querySelector("#detalje #popup-instruktør").textContent = `Instruktør: ${produkt.gsx$instuktør.$t};`
+      document.querySelector("#detalje #popup-op").textContent = `Udgivelsesår: ${produkt.gsx$år.$t};`
+      document.querySelector("#detalje #popup-spilletid").textContent = `Spilletid: ${produkt.gsx$tid.$t};`
+      document.querySelector("#detalje #popup-skuespillere").textContent = produkt.gsx$cast.$t;
+      document.querySelector("#detalje #popup-produktion").textContent = produkt.gsx$prod.$t;
+      document.querySelector("#detalje #popup-rating").textContent =
+        `Stjerner: ${produkt.gsx$stjerner.$t};`
+      document.querySelector("#detalje img").src = "img/" + produkt.gsx$cover.$t + "/plakat.jpg";
+      document.querySelector("#detalje img").alt = produkt.gsx$titel.$t;
+
+      container.appendChild(klon);
+    }
+  </script>
+</body>
+
+</html>
