@@ -5,6 +5,14 @@
   <meta charset="UTF-8">
   <title>titel-database med mad indtil videre</title>
   <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
+    a {
+      color: inherit;
+    }
+
     * {
       box-sizing: border-box;
     }
@@ -34,16 +42,18 @@
       justify-content: center;
     }
 
-    .top {
+    .link-wrap {
 
       height: 30px;
       width: 30%;
       text-transform: uppercase;
       color: white;
+      text-decoration: none;
       background-color: transparent;
       border: none;
       margin-top: 15px;
       margin-bottom: 15px;
+      font-size: 1.5rem;
     }
 
     #overskrift {
@@ -102,6 +112,7 @@
       height: 30px;
       width: 100%;
       font-weight: bold;
+      text-align: left;
     }
 
     .gap {
@@ -244,6 +255,7 @@
     <div class="logo">
       <img src="logo.png" alt="">
     </div>
+    <a id="top"></a>
   </header>
 
   <h1 id="overskrift">Alle</h1>
@@ -288,7 +300,8 @@
   </section>
 
   <footer>
-    <button class="top">til toppen</button>
+    <div class="link-wrap">
+      <a href="#top">Til toppen</a></div>
   </footer>
 
   <script>
