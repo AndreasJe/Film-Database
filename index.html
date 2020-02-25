@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>titel-database med mad indtil videre</title>
+  <title>FilmPortalen</title>
   <style>
     html {
       scroll-behavior: smooth;
@@ -717,6 +717,9 @@
   <script src="https://kit.fontawesome.com/773391977c.js" crossorigin="anonymous"></script>
 </head>
 
+
+<!-- NAV - Burger og Menu-knapper  -->
+
 <body>
   <div>
     <nav>
@@ -736,6 +739,7 @@
     </nav>
 
 
+    <!-- HEADER med logo -->
 
     <div id="wrapper">
       <header id="header">
@@ -745,9 +749,12 @@
         <a id="top"></a>
       </header>
 
+
+      <!-- Overskrift for kategori - filtreres med javascript -->
+
       <h1 id="overskrift">Alle</h1>
 
-      <!--  TIL SLIDE-IN POPUP   -->
+      <!--  Hele pop-upens struktur. Her har vi meget data, som er pakket ind i grid   -->
 
       <section id="detalje" class="skjul">
         <article id="produkt">
@@ -783,7 +790,7 @@
       <section class="data-container" id="main"></section>
 
 
-
+      <!-- Template for vores produkt, der gentages på forsiden -->
 
       <template>
         <article id="produkt">
@@ -798,6 +805,9 @@
       </footer>
     </div>
   </div>
+
+
+
   <script>
     const container = document.querySelector(".data-container");
     const template = document.querySelector("template");
@@ -813,6 +823,8 @@
     document.addEventListener("DOMContentLoaded", getJson);
 
 
+
+    /* Funktionen henter vores data fra ovenstående URL, herefter vises henvises til næste funktion */
     async function getJson() {
 
       const jsonData = await fetch(url);
@@ -821,6 +833,9 @@
       addEventListenersToButtons();
     }
 
+
+
+    /* Funktion som viser retter i main-grid - Disse henviser enkeltvis til deres produkt */
     function visRetter() {
       container.innerHTML = "";
       antal = produkter.feed.entry.length;
@@ -839,6 +854,7 @@
 
 
 
+    /* Eventlisteners på menu-knapper */
     function addEventListenersToButtons() {
       document.querySelectorAll(".filter").forEach(elm => {
         elm.addEventListener("click", filtrering);
@@ -846,6 +862,8 @@
     }
 
 
+
+    /* Filterering efter genre, bestemt ud fra Dataset - derefter visning af denne kategori */
     function filtrering() {
       filter = this.dataset.genre;
       document.querySelector("h1").textContent = this.textContent;
@@ -858,6 +876,9 @@
 
     }
 
+
+
+    /* Popup visning af enkelt-film valgt ud fra id */
     function visDetalje(produkt) {
       const klon = template.cloneNode(true).content;
       detalje.classList.remove("skjul");
@@ -880,15 +901,19 @@
       document.querySelector("#detalje img").alt = `Plakat af filmen: ${produkt.gsx$titel.$t}`
 
       container.appendChild(klon);
+      window.scrollTo(0, 0);
     }
 
-    /* OFF Canvas-menuen til mobil */
+
+
+    /* OFF Canvas-menuen til mobil - Content får tildelt marginLeft og menu får tildelt width */
     function openNav() {
       document.getElementById("menu").style.width = "250px";
       document.getElementById("wrapper").style.marginLeft = "250px";
       console.log("Der åbnes for Mobil sidebar");
     }
 
+    /* OFF Canvas-menuen til mobil - MarginLeft og Width fjernes igen */
     function closeNav() {
       document.getElementById("menu").style.width = "0";
       document.getElementById("wrapper").style.marginLeft = "0";
