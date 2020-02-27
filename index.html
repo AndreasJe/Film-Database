@@ -2,1165 +2,1300 @@
 <html lang="en">
 
 <head>
-  <link href="https://fonts.googleapis.com/css?family=Montserrat:300,600,800,900&display=swap" rel="stylesheet">
-  <meta charset="UTF-8">
-  <title>FilmPortalen</title>
-  <style>
-    /*----------generalt-------------*/
-    html {
-      scroll-behavior: smooth;
-    }
-
-    a {
-      color: inherit;
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    article img {
-      max-width: 100%;
-      object-fit: fill;
-    }
-
-    article img:hover {
-      cursor: pointer;
-      opacity: 40%;
-    }
-
-    body {
-      font-family: 'Montserrat';
-      width: 100vw;
-      background-color: #2E2E2E;
-      margin: 0;
-      transition: background-color .5s;
-    }
-
-    header {
-      top: 0;
-      width: 100vw;
-      height: 60px;
-      background-color: #525252;
-    }
-
-    footer {
-      width: 100vw;
-      height: 60px;
-      background-color: #525252;
-      display: flex;
-      justify-content: center;
-      bottom: 0;
-      margin-top: 100px;
-    }
-
-    .link-wrap {
-      height: 30px;
-      width: 30%;
-      text-transform: uppercase;
-      color: white;
-      text-decoration: none;
-      background-color: transparent;
-      border: none;
-      margin-top: 15px;
-      margin-bottom: 15px;
-      font-size: 1.5rem;
-      text-align: center;
-      bottom: 0;
-    }
-
-    #overskrift {
-      color: white;
-      text-align: center;
-    }
-
-
-    .data-container {
-      overflow: hidden;
-      break-inside: avoid;
-      margin: auto;
-      width: 70%;
-      padding: 10px;
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      /* Media Queries på min værdi: UWHD og UHD: 450px || Laptop og TV: 250px || Tablet og Telefon: 100-200px,  */
-      grid-gap: 10px;
-    }
-
-
-
-
-
-    /* MENU STYLING */
-
-    #menu {
-      height: 100vh;
-      width: 0;
-      z-index: 1;
-      top: 0;
-      left: 0;
-      background-color: #525252;
-      padding-top: 60px;
-      padding-left: 10px;
-      position: fixed;
-      overflow-x: hidden;
-      padding-top: 60px;
-    }
-
-    #menu button {
-      background-color: transparent;
-      text-transform: uppercase;
-      display: block;
-      padding: 10px;
-      border: none;
-      text-decoration: none;
-      font-size: 1.5rem;
-      /* Media Queries på Font-size. vw på desktop< og vh på tablet> plejer at virke meget godt. */
-    }
-
-    #menu button:hover {
-      opacity: 40%;
-      cursor: pointer;
-    }
-
-    .valgt {
-      color: #F4484B !important;
-      /* Klassen blev overridded, så der er lagt Important på indtil videre. */
-
-    }
-
-    .filter {
-      color: white;
-      height: 30px;
-      width: 100%;
-      text-align: left;
-      font-family: 'Montserrat';
-      font-weight: 900;
-      cursor: pointer;
-    }
-
-    .gap {
-      margin-top: 50px;
-    }
-
-
-    #menu {
-      transition: margin-left .5s;
-    }
-
-
-
-
-
-    /* ARTICLE STYLING */
-
-
-    #produkt {
-      height: 70%;
-      width: 100%;
-      margin: auto;
-      padding: 0.8em;
-    }
-
-
-
-
-
-    /* TO GENRELLE SMÅ WRAPPERS TIL HACKS */
-
-    .col_wrapper {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .row_wrapper {
-      display: flex;
-      flex-direction: row;
-    }
-
-
-
-
-
-    /* KNAPPER I POPUP - PLACERING */
-
-    .share {
-      position: absolute;
-      top: 2vw;
-      right: 5vw;
-      font-size: 200%;
-      color: white;
-      cursor: pointer;
-      height: 50px;
-      width: 50px;
-    }
-
-    .luk {
-      position: absolute;
-      right: 95vw;
-      font-size: 200%;
-      color: white;
-      height: 50px;
-      width: 50px;
-
-      cursor: pointer;
-    }
-
-
-
-
-
-    /* Animation STYLING */
-
-
-    .skjul {
-      display: none;
-    }
-
-    @keyframes slider {
-      0% {
-        height: 10vh;
-      }
-
-
-      100% {
-        height: 70vh;
-      }
-    }
-
-
-
-
-
-    /* POPUP STYLING */
-
-    #detalje {
-      position: relative;
-      overflow: hidden;
-      height: 70vh;
-      width: 80vw;
-      margin: 0;
-      background-color: #1F1F1F;
-      animation-name: slider;
-      animation-duration: 1s;
-    }
-
-    #detalje #produkt {
-      margin: 0;
-      padding: 20px;
-      background-color: #1F1F1F;
-      position: relative;
-    }
-
-
-
-
-    /*-----------POPUP INDHOLD------------- DEN RELATIVE BOKS*/
-    #detalje .main_wrapper {
-      position: relative;
-      width: 100%;
-      height: 70vh;
-      margin: 0;
-      background-color: #1F1F1F;
-    }
-
-
-
-
-    /*-----------ENKELT PLACERING PÅ ELEMENTER I POPUPPEN.-------*/
-
-
-    #detalje #popup-plakat {
-      position: absolute;
-      left: 5vw;
-      top: 10vw;
-      max-width: 38%;
-    }
-
-    #popup-rating {
-      position: inherit;
-      margin-left: 45%;
-      width: 40%;
-      padding-bottom: 10px;
-      margin-top: 0;
-      margin-bottom: 0;
-      top: 2px;
-    }
-
-    .instruktør {
-      position: inherit;
-      margin-left: 45%;
-
-      top: 15px;
-      margin-top: 0;
-      margin-bottom: 0;
-      text-align: left;
-    }
-
-    #popup-instruktør {
-      position: inherit;
-      margin-left: 50%;
-      width: 50%;
-
-      top: 15px;
-      margin-top: 0;
-      margin-bottom: 0;
-    }
-
-    .spilletid {
-      align-self: baseline;
-      position: inherit;
-      margin-left: 45%;
-      width: 40%;
-      top: 39px;
-      height: 40px;
-    }
-
-    #popup-spilletid {
-      align-self: baseline;
-      margin-right: 20%;
-      width: 300px;
-      height: 40px;
-    }
-
-    .skuespillere {
-
-      position: inherit;
-      margin-left: 45%;
-
-      text-align: left;
-      top: 10px;
-
-    }
-
-    #popup-skuespillere {
-      position: inherit;
-      margin-left: 50%;
-      text-align: left;
-      width: 50%;
-      top: -15px;
-
-    }
-
-    #popup-film {
-      text-align: center;
-      border-bottom: 4px solid white;
-      text-transform: uppercase;
-      margin-top: 25px;
-      margin-bottom: 40px;
-      margin-right: auto;
-      margin-left: auto;
-      padding: 0;
-      font-family: 'Montserrat';
-      font-weight: 900;
-      font-size: 3vw;
-    }
-
-    .produk {
-      position: inherit;
-      margin: 0;
-      top: 185px;
-      margin-left: 60%;
-    }
-
-    #popup-produktion {
-      position: inherit;
-      margin: 0;
-      top: 190px;
-      margin-left: 60%;
-    }
-
-    .plot-txt {
-      position: inherit;
-      left: 5vw;
-      top: 180px;
-      text-align: left;
-      width: 40%;
-      margin: 0;
-
-    }
-
-    #popup-beskrivelse {
-      position: inherit;
-      left: 5vw;
-      top: 200px;
-      width: 90%;
-      margin: 0;
-    }
-
-    .år {
-      position: inherit;
-      margin: 0;
-      top: 280px;
-      left: 5px;
-    }
-
-    #popup-op {
-      position: inherit;
-      margin: 0;
-      top: 280px;
-      margin-left: 15%;
-    }
-
-    /* -----------------------------------------TEKST STYLING---------------------- */
-
-    /* brødtekst på popup */
-    p {
-      color: white;
-      font-family: 'Montserrat';
-      font-size: 3vw;
-      font-weight: 300;
-    }
-
-    /* Overskrift på mainpage */
-    h1 {
-      margin-top: 25px;
-      margin-bottom: 40px;
-      margin-right: auto;
-      margin-left: auto;
-      color: white;
-      font-family: 'Montserrat';
-      font-weight: 900;
-    }
-
-
-    /* Overskrift på popup */
-    h2 {
-      padding-top: 30px;
-      padding-bottom: 30px;
-      padding-left: 3vw;
-      margin: auto;
-      color: white;
-      font-family: 'Montserrat';
-      font-weight: 900;
-    }
-
-    /* Underoverskrift på popup */
-    h3 {
-      color: white;
-      font-family: 'Montserrat';
-      font-weight: 600;
-      font-size: 3vw;
-    }
-
-
-    /* ---------------------------------------LOGO STYLING----------------------- */
-
-    header .logo {
-      position: relative;
-      height: 60px;
-      width: auto;
-    }
-
-    header .logo img {
-      position: absolute;
-      right: 5px;
-      height: 80px;
-      cursor: pointer;
-    }
-
-
-
-
-
-    /* -----------------MEDIA QUERIE--------------- - Mobil og Desktop -----------------*/
-
-
-
-
-
-
-    @media screen and (max-width: 1000px) {
-
-
-
-      .år {
-        display: none;
-      }
-
-      #popup-op {
-        display: none;
-      }
-
-      .produk {
-        display: none;
-      }
-
-      #popup-produktion {
-        display: none;
-      }
-
-
-      /* Styling af copy link knappen i popuppen */
-
-      .share {
-        top: 50vw;
-        right: 5vw;
-        font-size: 400%;
-        opacity: 90%;
-      }
-
-      /* Styling af luk knappen i popuppen */
-      .luk {
-        position: absolute;
-        bottom: 10vw;
-        right: 80vw;
-        font-size: 400%;
-        opacity: 90%;
-      }
-
-      /* Poster-view på mainpage - output af data */
-      .data-container {
-        break-inside: avoid;
-        margin: 0;
-        width: 100vw;
-        padding: 10px;
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-        /* Media Queries på min værdi: UWHD og UHD: 450px || Laptop og TV: 250px || Tablet og Telefon: 100-200px,  */
-        grid-gap: 10px;
-      }
-
-      /* Styling af menuen */
-      #menu {
-        height: 100vh;
-        z-index: 1;
-        top: 0;
-        left: 0;
-        background-color: #525252;
-        padding-left: 10px;
-        position: fixed;
-        overflow-x: hidden;
-        transition: 0.2s;
-        padding-top: 60px;
-        width: 0;
-      }
-
-      /* Styling af knapper i menuen */
-      #menu button {
-        background-color: transparent;
-        text-transform: uppercase;
-        display: block;
-        padding: 10px;
-        border: none;
-        text-decoration: none;
-        font-size: 1.5rem;
-        /* Media Queries på Font-size. vw på desktop< og vh på tablet> plejer at virke meget godt. */
-      }
-
-      /* Styling af hover over menupunkter */
-      #menu button:hover {
-        opacity: 40%;
-
-      }
-
-      /* Styling af valgte menupunkter */
-      .valgt {
-        color: #F4484B !important;
-        /* Klassen blev overridded, så der er lagt Important på indtil videre. */
-
-      }
-
-      /* Styling af  menupunkter */
-      .filter {
-        color: white;
-        height: 30px;
-        width: 100%;
-        font-weight: bold;
-        text-align: left;
-      }
-
-      /* Styling af popup */
-      .closebtn {
-        color: white;
-        position: absolute;
-        top: 0;
-        right: 25px;
-        font-size: 36px;
-        margin-left: 50px;
-        height: 60px;
-      }
-
-
-      /* Styling af burger knap */
-      .burger {
-        position: absolute;
-        left: 25px;
-        top: 10px;
-        color: white;
-        font-size: 30px;
-        cursor: pointer;
-        z-index: 1;
-      }
-
-      /* Styling af popup */
-
-      #detalje {
-        height: 70vh;
-        width: 100vw;
-        margin: 0;
-      }
-    }
-
-
-
-
-
-    /* -----------------MEDIA QUERIE--------------- - Desktop -----------------*/
-
-
-
-
-
-    @media screen and (min-width: 1000px) {
-
-
-      /* Wrapper til content, så menuen får plads.*/
-      .wrapper {
-        padding-left: 20vw;
-      }
-
-      /* Fjerner burgerknappen fra mobilversionen*/
-      .burger {
-        display: none;
-      }
-
-      /* Styling af copy link knappen i popuppen */
-      .share {
-        top: 2vw;
-        right: 10vw;
-        font-size: 300%;
-      }
-
-      /* Styling af luk knappen i popuppen */
-      .luk {
-        top: 2vw;
-        right: 5vw;
-        font-size: 300%;
-      }
-
-
-      /* Poster-view på mainpage - output af data */
-      .data-container {
-        break-inside: avoid;
-        width: 80vw;
-        padding: 100px;
-        margin-left: 20vw;
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-        /* Media Queries på min værdi: UWHD og UHD: 450px || Laptop og TV: 250px || Tablet og Telefon: 100-200px,  */
-        grid-gap: 10px;
-      }
-
-      /* Styling af menuen */
-      #menu {
-        height: 100%;
-        width: 20vw;
-        z-index: 1;
-        top: 0;
-        left: 0;
-        background-color: #525252;
-        padding-top: 60px;
-        padding-left: 10px;
-        position: fixed;
-        transition: 0.5s;
-        overflow-x: auto;
-        padding-top: 60px;
-      }
-
-      /* Styling af knapper i menuen */
-      #menu button {
-        background-color: transparent;
-        text-transform: uppercase;
-        display: block;
-        padding: 10px;
-        border: none;
-        text-decoration: none;
-        font-size: 1.5vw;
-        /* Media Queries på Font-size. vw på desktop< og vh på tablet> plejer at virke meget godt. */
-      }
-
-      /* Styling af hover over menupunkter */
-      #menu button:hover {
-        opacity: 40%;
-      }
-
-      /* Styling af valgte menupunkter */
-      .valgt {
-        color: #F4484B !important;
-        /* Klassen blev overridded, så der er lagt Important på indtil videre. */
-
-      }
-
-      /* Styling af  menupunkter */
-      .filter {
-        color: white;
-        height: 30px;
-        width: 100%;
-        font-weight: bold;
-        text-align: left;
-      }
-
-      /* Styling af popup */
-      #detalje {
-        position: relative;
-        height: 70vh;
-        width: 80vw;
-        margin-left: 20vw;
-        animation-name: slider;
-        animation-duration: 1s;
-      }
-
-
-      #detalje #produkt {
-        background-color: #1F1F1F;
-        padding: 20px;
-        width: 80vw;
-        height: 75vh;
-      }
-
-
-
-      #detalje .main_wrapper {
-        position: relative;
-        width: 80vw;
-
-      }
-
-
-
-      /* Plakatens i popuppen */
-
-      #detalje #popup-plakat {}
-
-      .overskrift {
-        margin-left: 20vw;
-        max-width: 35%;
-      }
-
-      .closebtn {
-        display: none;
-      }
-
-
-
-      /* Animation på pop-up størrelse */
-
-
-      @keyframes slider {
-        0% {
-          height: 10vh;
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,600,800,900&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <title>FilmPortalen</title>
+    <style>
+        /*----------generalt-------------*/
+        html {
+            scroll-behavior: smooth;
+        }
+
+        a {
+            color: inherit;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        article img {
+            max-width: 100%;
+            object-fit: fill;
+        }
+
+        article img:hover {
+            cursor: pointer;
+            opacity: 40%;
+        }
+
+        body {
+            font-family: 'Montserrat';
+            width: 100vw;
+            background-color: #2E2E2E;
+            margin: 0;
+            transition: background-color .5s;
+        }
+
+        header {
+            top: 0;
+            width: 100vw;
+            height: 60px;
+            background-color: #525252;
+        }
+
+        footer {
+            width: 100vw;
+            height: 60px;
+            background-color: #525252;
+            display: flex;
+            justify-content: center;
+            bottom: 0;
+            margin-top: 100px;
+        }
+
+        .link-wrap {
+            height: 30px;
+            width: 30%;
+            text-transform: uppercase;
+            color: white;
+            text-decoration: none;
+            background-color: transparent;
+            border: none;
+            margin-top: 15px;
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+            text-align: center;
+            bottom: 0;
+        }
+
+        #overskrift {
+            color: white;
+            text-align: center;
         }
 
 
-        100% {
-          height: 70vh;
-        }
-      }
-    }
-
-
-    /* Pop-up elementer */
-
-    #popup-film {
-      border-bottom: 4px solid white;
-      width: 50%;
-      margin-top: 25px;
-      margin-bottom: 40px;
-      padding: 0;
-      font-size: 3vw;
-    }
-
-
-
-
-
-    /* -----------------MEDIA QUERIE--------------- - ULTRA WIDE Desktop -----------------*/
-
-
-
-
-
-
-    @media screen and (min-width: 1600px) {
-
-
-      /* Popup */
-
-
-      #detalje {
-        position: relative;
-        height: 80vh;
-        width: 80vw;
-        margin-left: 20vw;
-        animation-name: slider;
-        animation-duration: 1s;
-        background-color: #1F1F1F;
-      }
-
-
-      #detalje #produkt {
-        background-color: #1F1F1F;
-        padding: 20px;
-        width: 80vw;
-      }
-
-
-
-      /* Grid til popup */
-
-      #detalje .main_wrapper {
-        position: relative;
-        width: 80vw;
-        background-color: #1F1F1F;
-
-      }
-
-      /* Plakatens i popuppen */
-
-      #detalje #popup-plakat {}
-
-
-
-      /* Styling af wrapper omkring content. Flytter hele mainpage, når menuen er static */
-      .wrapper {
-        margin-left: 20vw;
-
-        width: 80vw;
-      }
-
-      /* Styling af poster-view på forsiden */
-      .data-container {
-        break-inside: avoid;
-        width: 80vw;
-        padding: 10px;
-        margin: 0;
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-        /* Media Queries på min værdi: UWHD og UHD: 450px || Laptop og TV: 250px || Tablet og Telefon: 100-200px,  */
-        grid-gap: 10px;
-        margin-left: 20vw;
-      }
-
-      /* Styling af menu*/
-      #menu {
-        height: 100%;
-        width: 20vw;
-        z-index: 1;
-        top: 0;
-        left: 0;
-        background-color: #525252;
-        padding-top: 60px;
-        padding-left: 10px;
-        position: fixed;
-        overflow-x: hidden;
-        transition: 0.5s;
-        padding-top: 60px;
-      }
-
-      /* Styling af menupunkter - button tag */
-      #menu button {
-        background-color: transparent;
-        text-transform: uppercase;
-        display: block;
-        padding: 10px;
-        border: none;
-        text-decoration: none;
-        font-size: 2rem;
-        /* Media Queries på Font-size. vw på desktop< og vh på tablet> plejer at virke meget godt. */
-      }
-
-      /* Styling af hover på menupunkter */
-      #menu button:hover {
-        opacity: 40%;
-      }
-
-      /* Styling af valgte menupunkter */
-      .valgt {
-        color: #F4484B !important;
-        /* Klassen blev overridded, så der er lagt Important på indtil videre. */
-
-      }
-
-      /* Styling af menupunkter */
-      .filter {
-        color: white;
-        height: 30px;
-        width: 100%;
-        font-weight: bold;
-        text-align: left;
-      }
-
-      /* Styling af overskrift på mainpage */
-      .overskrift {
-        margin-left: 20vw;
-      }
-
-
-      /* Fjerner luk knappen fra burgermenuen */
-      .closebtn {
-        display: none;
-      }
-
-      /* Animation på popup */
-      @keyframes slider {
-        0% {
-          height: 10vh;
+        .data-container {
+            overflow: hidden;
+            break-inside: avoid;
+            margin: auto;
+            width: 70%;
+            padding: 10px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            /* Media Queries på min værdi: UWHD og UHD: 450px || Laptop og TV: 250px || Tablet og Telefon: 100-200px,  */
+            grid-gap: 10px;
         }
 
 
-        100% {
-          height: 80vh;
+
+
+
+        /* MENU STYLING */
+
+        #menu {
+            height: 100vh;
+            width: 0;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            background-color: #525252;
+            padding-top: 60px;
+            padding-left: 10px;
+            position: fixed;
+            overflow-x: hidden;
+            padding-top: 60px;
         }
-      }
 
-      /* Pop-up elementer */
+        #menu button {
+            background-color: transparent;
+            text-transform: uppercase;
+            display: block;
+            padding: 10px;
+            border: none;
+            text-decoration: none;
+            font-size: 1.5rem;
+            /* Media Queries på Font-size. vw på desktop< og vh på tablet> plejer at virke meget godt. */
+        }
 
-      #popup-film {
-        text-align: left;
-        border-bottom: 4px solid white;
-        text-transform: uppercase;
-        width: 50%;
-        margin-top: 25px;
-        margin-bottom: 40px;
-        margin-right: auto;
-        margin-left: 31%;
-        padding: 0;
-        font-family: 'Montserrat';
-        font-weight: 900;
-        font-size: 3vw;
-      }
+        #menu button:hover {
+            opacity: 40%;
+            cursor: pointer;
+        }
 
-    }
-  </style>
-  <script src="https://kit.fontawesome.com/773391977c.js" crossorigin="anonymous"></script>
+        .valgt {
+            color: #F4484B !important;
+            /* Klassen blev overridded, så der er lagt Important på indtil videre. */
+
+        }
+
+        .filter {
+            color: white;
+            height: 30px;
+            width: 100%;
+            text-align: left;
+            font-family: 'Montserrat';
+            font-weight: 900;
+            cursor: pointer;
+        }
+
+        .gap {
+            margin-top: 50px;
+        }
+
+
+        #menu {
+            transition: margin-left .5s;
+        }
+
+
+
+
+
+        /* ARTICLE STYLING */
+
+
+        #produkt {
+            width: 100%;
+            margin: auto;
+            padding: 0.8em;
+        }
+
+
+
+
+
+        /* TO GENRELLE SMÅ WRAPPERS TIL HACKS */
+
+        .col_wrapper {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .row_wrapper {
+            display: flex;
+            flex-direction: row;
+        }
+
+
+
+
+
+
+
+
+
+
+
+        /* Animation STYLING */
+
+
+        .skjul {
+            display: none;
+        }
+
+        @keyframes slider {
+            0% {
+                height: 10vh;
+            }
+
+
+            100% {
+                height: 70vh;
+            }
+        }
+
+
+
+
+        /*-----------POPUP INDHOLD-------------*/
+
+
+        /*class yellow til stjerne*/
+
+        .yellow {
+            color: yellow;
+        }
+
+        .white {
+            color: white;
+        }
+
+        /* POPUP STYLING */
+        #detalje {
+            position: relative;
+            overflow: hidden;
+            width: 100vw;
+            margin: 0;
+            background-color: #1F1F1F;
+            animation-name: slider;
+            animation-duration: 1s;
+        }
+
+
+        #detalje #produkt {
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #1F1F1F;
+            position: relative;
+        }
+
+        #detalje .main_wrapper {
+            position: relative;
+            background-color: #1F1F1F;
+            display: grid;
+            grid-gap: 10px;
+            grid-template-columns: 40% 60%;
+
+        }
+
+        /*-----------BILLEDE, RATING, SPILLETID OG INSTRUTØR-------*/
+
+        /* De to ovenstående grid properties bestemmer hvor i griddet, elementet er placeret. Info1 fylder altså 1 og span'er over i 2. kolonne ud, men kun i den første række*/
+        #detalje .titel {
+            margin: 0 auto;
+            margin-top: 1rem;
+            margin-bottom: 0.6rem;
+            grid-column: 1 / span 2;
+            grid-row: 2;
+
+            text-align: center;
+            padding-top: 1rem;
+            font-size: 3.5rem;
+            font-family: 'Montserrat', ;
+            text-transform: uppercase;
+
+        }
+
+        #detalje .pic {
+            margin: 0 auto;
+            grid-column: 1 / span 1;
+            grid-row: 3 / span 3;
+            width: 100%;
+            padding-top: 1rem;
+            padding-left: 1rem;
+
+        }
+
+
+        #detalje #stars {
+            margin: 0 auto;
+            grid-column: 1 / span 1;
+            grid-row: 6 / span 1;
+            width: 100%;
+            padding-top: 1rem;
+            padding-left: 1rem;
+
+        }
+
+        #detalje .info1 {
+            grid-column: 2 / span 1;
+            grid-row: 3;
+            font-size: 2.5rem;
+            margin-top: 0;
+            padding: 1rem;
+            padding-top: 0;
+            padding-bottom: 0;
+            font-family: 'Montserrat', ;
+
+
+
+        }
+
+        #detalje .info2 {
+            grid-column: 2 / span 1;
+            grid-row: 5;
+            font-size: 2.5rem;
+            padding: 1rem;
+            padding-top: 0;
+            padding-bottom: 0;
+            font-family: 'Montserrat', ;
+
+
+
+        }
+
+        #detalje .info3 {
+            grid-column: 2 / span 1;
+            grid-row: 4;
+
+            font-size: 2.5rem;
+            padding: 1rem;
+            padding-top: 0;
+            padding-bottom: 0;
+            font-family: 'Montserrat', ;
+
+
+
+        }
+
+        #detalje .info4 {
+
+            grid-column: 1 / span 1;
+            grid-row: 8;
+            font-size: 2.5rem;
+            margin: 0 auto;
+            padding: 1rem;
+            display: none;
+
+        }
+
+        #detalje .info5 {
+            grid-column: 2 / span 1;
+            grid-row: 8;
+            margin: 0 auto;
+            font-size: 2.5rem;
+            padding: 1rem;
+            display: none;
+
+        }
+
+        #detalje .info6 {
+            grid-column: 1 / span 2;
+            grid-row: 7;
+            margin-top: 0px;
+            margin: 0 auto;
+            font-size: 2.5rem;
+            padding: 1rem;
+
+
+        }
+
+        #detalje h3 {
+            color: white;
+        }
+
+        /* KNAPPER I POPUP - PLACERING */
+
+        .share {
+            grid-column: 2 / span 1;
+            grid-row: 6;
+            font-size: 300%;
+            color: white;
+            cursor: pointer;
+            height: 50px;
+            width: 50px;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+
+        .luk {
+            grid-column: 2 / span 1;
+            grid-row: 1;
+            font-size: 200%;
+            color: white;
+            height: 50px;
+            width: 50px;
+            margin-left: 90%;
+            cursor: pointer;
+        }
+
+        .år {
+            position: inherit;
+            margin: 0;
+            top: 280px;
+            left: 5px;
+        }
+
+        #popup-op {
+            position: inherit;
+            margin: 0;
+            top: 280px;
+            margin-left: 15%;
+        }
+
+        /* -----------------------------------------TEKST STYLING---------------------- */
+
+        /* brødtekst på popup */
+        p {
+            color: white;
+            font-family: 'Montserrat';
+            font-size: 3vw;
+            font-weight: 300;
+        }
+
+        /* Overskrift på mainpage */
+        h1 {
+            margin-top: 25px;
+            margin-bottom: 40px;
+            margin-right: auto;
+            margin-left: auto;
+            color: white;
+            font-family: 'Montserrat';
+            font-weight: 900;
+        }
+
+
+        /* Overskrift på popup */
+        h2 {
+            padding-top: 30px;
+            padding-bottom: 30px;
+            padding-left: 3vw;
+            margin: auto;
+            color: white;
+            font-family: 'Montserrat';
+            font-weight: 900;
+        }
+
+        /* Underoverskrift på popup */
+        h3 {
+            color: white;
+            font-family: 'Montserrat';
+            font-weight: 600;
+            font-size: 3vw;
+        }
+
+
+        /* ---------------------------------------LOGO STYLING----------------------- */
+
+        header .logo {
+            position: relative;
+            height: 60px;
+            width: auto;
+        }
+
+        header .logo img {
+            position: absolute;
+            right: 5px;
+            height: 80px;
+            cursor: pointer;
+        }
+
+
+
+
+
+        /* -----------------MEDIA QUERIE--------------- - Mobil og Desktop -----------------*/
+
+
+
+
+
+
+        @media screen and (max-width: 1000px) {
+
+
+
+            .år {
+                display: none;
+            }
+
+            #popup-op {
+                display: none;
+            }
+
+            .produk {
+                display: none;
+            }
+
+            #popup-produktion {
+                display: none;
+            }
+
+
+            /* Styling af copy link knappen i popuppen */
+
+
+
+            /* Styling af luk knappen i popuppen */
+
+
+            /* Poster-view på mainpage - output af data */
+            .data-container {
+                break-inside: avoid;
+                margin: 0;
+                width: 100vw;
+                padding: 10px;
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+                /* Media Queries på min værdi: UWHD og UHD: 450px || Laptop og TV: 250px || Tablet og Telefon: 100-200px,  */
+                grid-gap: 10px;
+            }
+
+            /* Styling af menuen */
+            #menu {
+                height: 100vh;
+                z-index: 1;
+                top: 0;
+                left: 0;
+                background-color: #525252;
+                padding-left: 10px;
+                position: fixed;
+                overflow-x: hidden;
+                transition: 0.2s;
+                padding-top: 60px;
+                width: 0;
+            }
+
+            /* Styling af knapper i menuen */
+            #menu button {
+                background-color: transparent;
+                text-transform: uppercase;
+                display: block;
+                padding: 10px;
+                border: none;
+                text-decoration: none;
+                font-size: 1.5rem;
+                /* Media Queries på Font-size. vw på desktop< og vh på tablet> plejer at virke meget godt. */
+            }
+
+            /* Styling af hover over menupunkter */
+            #menu button:hover {
+                opacity: 40%;
+
+            }
+
+            /* Styling af valgte menupunkter */
+            .valgt {
+                color: #F4484B !important;
+                /* Klassen blev overridded, så der er lagt Important på indtil videre. */
+
+            }
+
+            /* Styling af  menupunkter */
+            .filter {
+                color: white;
+                height: 30px;
+                width: 100%;
+                font-weight: bold;
+                text-align: left;
+            }
+
+            /* Styling af popup */
+            .closebtn {
+                color: white;
+                position: absolute;
+                top: 0;
+                right: 25px;
+                font-size: 36px;
+                margin-left: 50px;
+                height: 60px;
+            }
+
+
+            /* Styling af burger knap */
+            .burger {
+                position: absolute;
+                left: 25px;
+                top: 10px;
+                color: white;
+                font-size: 30px;
+                cursor: pointer;
+                z-index: 1;
+            }
+
+            /* Styling af popup */
+
+            #detalje {
+                height: 70vh;
+                width: 100vw;
+                margin: 0;
+            }
+        }
+
+
+
+
+
+        /* -----------------MEDIA QUERIE--------------- - Desktop -----------------*/
+
+
+
+
+
+        @media screen and (min-width: 1000px) {
+
+
+            /* Wrapper til content, så menuen får plads.*/
+            .wrapper {
+                padding-left: 20vw;
+            }
+
+            /* Fjerner burgerknappen fra mobilversionen*/
+            .burger {
+                display: none;
+            }
+
+            /* Styling af copy link knappen i popuppen */
+            .share {
+
+                font-size: 300%;
+            }
+
+            /* Styling af luk knappen i popuppen */
+            .luk {}
+
+
+            /* Poster-view på mainpage - output af data */
+            .data-container {
+                break-inside: avoid;
+                width: 80vw;
+                padding: 100px;
+                margin-left: 20vw;
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+                /* Media Queries på min værdi: UWHD og UHD: 450px || Laptop og TV: 250px || Tablet og Telefon: 100-200px,  */
+                grid-gap: 10px;
+            }
+
+            /* Styling af menuen */
+            #menu {
+                height: 100%;
+                width: 20vw;
+                z-index: 1;
+                top: 0;
+                left: 0;
+                background-color: #525252;
+                padding-top: 60px;
+                padding-left: 10px;
+                position: fixed;
+                transition: 0.5s;
+                overflow-x: auto;
+                padding-top: 60px;
+            }
+
+            /* Styling af knapper i menuen */
+            #menu button {
+                background-color: transparent;
+                text-transform: uppercase;
+                display: block;
+                padding: 10px;
+                border: none;
+                text-decoration: none;
+                font-size: 1.5vw;
+                /* Media Queries på Font-size. vw på desktop< og vh på tablet> plejer at virke meget godt. */
+            }
+
+            /* Styling af hover over menupunkter */
+            #menu button:hover {
+                opacity: 40%;
+            }
+
+            /* Styling af valgte menupunkter */
+            .valgt {
+                color: #F4484B !important;
+                /* Klassen blev overridded, så der er lagt Important på indtil videre. */
+
+            }
+
+            /* Styling af  menupunkter */
+            .filter {
+                color: white;
+                height: 30px;
+                width: 100%;
+                font-weight: bold;
+                text-align: left;
+            }
+
+            /* Styling af popup */
+            #detalje {
+                position: relative;
+                height: 70vh;
+                width: 80vw;
+                margin-left: 20vw;
+                animation-name: slider;
+                animation-duration: 1s;
+            }
+
+
+            #detalje #produkt {
+                background-color: #1F1F1F;
+                padding: 20px;
+                width: 80vw;
+
+            }
+
+
+
+            #detalje .main_wrapper {
+                position: relative;
+                width: 80vw;
+
+            }
+
+
+
+            /* Plakatens i popuppen */
+
+            #detalje #popup-plakat {}
+
+            .overskrift {
+                margin-left: 20vw;
+                max-width: 35%;
+            }
+
+            .closebtn {
+                display: none;
+            }
+
+
+
+            /* Animation på pop-up størrelse */
+
+
+            @keyframes slider {
+                0% {
+                    height: 10vh;
+                }
+
+
+                100% {
+                    height: 70vh;
+                }
+            }
+        }
+
+
+        /* Pop-up elementer */
+
+        #popup-film {
+            border-bottom: 4px solid white;
+
+            margin-top: 25px;
+            margin-bottom: 40px;
+            padding: 0;
+            font-size: 3vw;
+        }
+
+
+
+
+
+        /* -----------------MEDIA QUERIE--------------- - ULTRA WIDE Desktop -----------------*/
+
+
+
+
+
+
+        @media screen and (min-width: 1600px) {
+
+
+
+            #detalje {
+                width: 80%;
+                margin-right: 0vw;
+                margin-left: 20%;
+                padding: 0vw;
+            }
+
+
+            #detalje #produkt {
+                margin-right: 0vw;
+
+                right: 0vw;
+            }
+
+            #detalje .main_wrapper {
+                position: relative;
+                background-color: #1F1F1F;
+                display: grid;
+
+
+
+            }
+
+            #detalje .titel {
+                margin: 0 auto;
+                margin-left: 0px;
+                grid-column: 2 / span 1;
+                grid-row: 1;
+                border-bottom: 0.2rem solid white;
+                text-align: center;
+                padding: 1rem;
+
+                padding-top: 0.5rem;
+                font-size: 3rem;
+                height: 10rem;
+            }
+
+            #detalje .pic {
+                margin: 0 auto;
+                margin-top: 4rem;
+                grid-column: 1 / span 1;
+                grid-row: 1 / span 2;
+                width: 100%;
+                padding-top: 1rem;
+                ;
+
+            }
+
+            #detalje .info1 {
+                grid-column: 1 / span 1;
+                grid-row: 4;
+                font-size: 1rem;
+                padding: 1;
+                margin-left: 0;
+                padding-top: 0;
+                padding-bottom: 0;
+
+
+
+            }
+
+            #detalje .info2 {
+                grid-column: 1 / span 1;
+                grid-row: 3;
+                font-size: 1rem;
+                padding: 1;
+                padding-top: 0;
+                padding-bottom: 0;
+                margin-left: 0;
+
+
+
+
+            }
+
+            #detalje .info3 {
+                grid-column: 2 / span 1;
+                grid-row: 1;
+                font-size: 1rem;
+                padding: 1rem;
+
+                padding-top: 12rem;
+                font-size: 1.5rem;
+
+
+
+            }
+
+            #detalje .info4 {
+
+                grid-column: 1 / span 1;
+                grid-row: 5;
+                font-size: 1rem;
+                margin: 0 auto;
+                margin-left: 0;
+                padding: 1rem;
+                display: block;
+
+
+            }
+
+            #detalje .info5 {
+                grid-column: 1 / span 1;
+                grid-row: 6;
+                margin: 0 auto;
+                font-size: 1rem;
+                margin-left: 0;
+                padding: 1rem;
+                display: block;
+
+
+            }
+
+            #detalje .info6 {
+                grid-column: 2 / span 1;
+                grid-row: 2 / span 3;
+                margin-top: 0px;
+                margin: 0 auto;
+                margin-left: 0;
+                font-size: 1.5rem;
+                padding: 1rem;
+
+            }
+
+
+            /* Styling af wrapper omkring content. Flytter hele mainpage, når menuen er static */
+            .wrapper {
+                margin-left: 20vw;
+
+                width: 80vw;
+            }
+
+            /* Styling af poster-view på forsiden */
+            .data-container {
+                break-inside: avoid;
+                width: 80vw;
+                padding: 10px;
+                margin: 0;
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+                /* Media Queries på min værdi: UWHD og UHD: 450px || Laptop og TV: 250px || Tablet og Telefon: 100-200px,  */
+                grid-gap: 10px;
+                margin-left: 20vw;
+            }
+
+            /* Styling af menu*/
+            #menu {
+                height: 100%;
+                width: 20vw;
+                z-index: 1;
+                top: 0;
+                left: 0;
+                background-color: #525252;
+                padding-top: 60px;
+                padding-left: 10px;
+                position: fixed;
+                overflow-x: hidden;
+                transition: 0.5s;
+                padding-top: 60px;
+            }
+
+            /* Styling af menupunkter - button tag */
+            #menu button {
+                background-color: transparent;
+                text-transform: uppercase;
+                display: block;
+                padding: 10px;
+                border: none;
+                text-decoration: none;
+                font-size: 2rem;
+                /* Media Queries på Font-size. vw på desktop< og vh på tablet> plejer at virke meget godt. */
+            }
+
+            /* Styling af hover på menupunkter */
+            #menu button:hover {
+                opacity: 40%;
+            }
+
+            /* Styling af valgte menupunkter */
+            .valgt {
+                color: #F4484B !important;
+                /* Klassen blev overridded, så der er lagt Important på indtil videre. */
+
+            }
+
+            /* Styling af menupunkter */
+            .filter {
+                color: white;
+                height: 30px;
+                width: 100%;
+                font-weight: bold;
+                text-align: left;
+            }
+
+            /* Styling af overskrift på mainpage */
+            .overskrift {
+                margin-left: 20vw;
+            }
+
+
+            /* Fjerner luk knappen fra burgermenuen */
+            .closebtn {
+                display: none;
+            }
+
+            /* Animation på popup */
+            @keyframes slider {
+                0% {
+                    height: 10vh;
+                }
+
+
+                100% {
+                    height: 80vh;
+                }
+            }
+
+            /* Pop-up elementer */
+
+            #popup-film {
+                text-align: left;
+                border-bottom: 4px solid white;
+                text-transform: uppercase;
+                width: 50%;
+                margin-top: 25px;
+                margin-bottom: 40px;
+                margin-right: auto;
+                margin-left: 31%;
+                padding: 0;
+                font-family: 'Montserrat';
+                font-weight: 900;
+                font-size: 3vw;
+            }
+
+        }
+
+    </style>
+    <script src="https://kit.fontawesome.com/773391977c.js" crossorigin="anonymous"></script>
 </head>
 
 
 <!-- NAV - Burger og Menu-knapper  -->
 
 <body>
-  <div>
-    <nav>
-      <div class="burger">
-        <span onclick="openNav()">&#9776;</span>
-      </div>
-      <div id="menu">
-        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-        <button class="filter valgt" data-genre="alle">Alle</button>
-        <button class="filter gap" data-genre="dokumentar">Dokumentar</button>
-        <button class="filter" data-genre="gyser">Gyser</button>
-        <button class="filter" data-genre="komedier">Komedier</button>
-        <button class="filter gap" data-genre="pitter">Brad Pitter</button>
-        <button class="filter" data-genre="erotik">Erotik</button>
-        <button class="filter" data-genre="cluster">Clusterfucks</button>
-      </div>
-    </nav>
+    <div>
+        <nav>
+            <div class="burger">
+                <span onclick="openNav()">&#9776;</span>
+            </div>
+            <div id="menu">
+                <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+                <button class="filter valgt" data-genre="alle">Alle</button>
+                <button class="filter gap" data-genre="dokumentar">Dokumentar</button>
+                <button class="filter" data-genre="gyser">Gyser</button>
+                <button class="filter" data-genre="komedier">Komedier</button>
+                <button class="filter gap" data-genre="pitter">Brad Pitter</button>
+                <button class="filter" data-genre="erotik">Erotik</button>
+                <button class="filter" data-genre="cluster">Clusterfucks</button>
+            </div>
+        </nav>
 
 
-    <!-- HEADER med logo -->
+        <!-- HEADER med logo -->
 
-    <div id="wrapper">
-      <header id="header">
-        <div class="logo">
-          <a href="index.html"><img src="logo.png" height="30" width="156" alt="FilmPortalens logo" /></a>
+        <div id="wrapper">
+            <header id="header">
+                <div class="logo">
+                    <a href="index.html"><img src="logo.png" height="30" width="156" alt="FilmPortalens logo" /></a>
+                </div>
+                <a id="top"></a>
+            </header>
+
+
+            <!-- Overskrift for kategori - filtreres med javascript -->
+
+            <h1 id="overskrift">Alle</h1>
+
+            <!--  Hele pop-upens struktur. Her har vi meget data, som er pakket ind i grid   -->
+
+            <section id="detalje" class="skjul">
+                <article id="produkt">
+
+                    <div class="row_wrapper">
+                        <div class="main_wrapper">
+                            <div class="titel">
+                                <h2 id="popup-film"></h2>
+                            </div>
+
+                            <div class="pic">
+                                <img src="" alt="">
+                            </div>
+
+                            <div id="stars">
+                                <p id="popup-rating"></p>
+                                <i id="star1" class="fas fa-star"></i>
+                                <i id="star2" class="fas fa-star"></i>
+                                <i id="star3" class="fas fa-star"></i>
+                                <i id="star4" class="fas fa-star"></i>
+                                <i id="star5" class="fas fa-star"></i>
+                            </div>
+                            <div class="info1">
+                                <h3>Instruktør:</h3>
+                                <p id="popup-instruktør"> </p>
+                            </div>
+                            <div class="info2">
+                                <h3>Spilletid:</h3>
+
+                                <p id="popup-spilletid"></p>
+
+                            </div>
+                            <div class="info3">
+                                <h3>Skuespillere:</h3>
+
+                                <p id="popup-skuespillere"></p>
+                            </div>
+                            <div class="info4">
+                                <h3>Produktionsselskab:</h3>
+
+                                <p id="popup-produktion"></p>
+
+                            </div>
+                            <div class="info5">
+                                <h3>Udgivelsesår:</h3>
+
+                                <p id="popup-op"> </p>
+                            </div>
+
+                            <div class="info6">
+                                <h3>Plot:</h3>
+                                <p id="popup-beskrivelse"></p>
+                            </div>
+                            <!-- FontAwesome ikon for Kopier-Link knappen, som placeres ud fra Main.wrappers relative - brug right istedet for left. -->
+
+                            <div class="share"><i class="far fa-copy"></i>
+                            </div>
+                            <!-- FontAwesome ikon for Luk popup-knap, som placeres ud fra Main.wrappers relative - brug right istedet for left. -->
+
+                            <div class="luk"><i class="far fa-window-close"></i></div>
+                        </div>
+                    </div>
+
+
+
+                </article>
+            </section>
+            <section class="data-container" id="main"></section>
+
+
+            <!-- Template for vores produkt, der gentages på forsiden -->
+
+            <template>
+                <article id="produkt">
+                    <img src="" alt="">
+                </article>
+            </template>
+
+
+            <footer id="footer">
+                <div class="link-wrap">
+                    <a href="#top">Til toppen</a></div>
+            </footer>
         </div>
-        <a id="top"></a>
-      </header>
-
-
-      <!-- Overskrift for kategori - filtreres med javascript -->
-
-      <h1 id="overskrift">Alle</h1>
-
-      <!--  Hele pop-upens struktur. Her har vi meget data, som er pakket ind i grid   -->
-
-      <section id="detalje" class="skjul">
-
-        <article id="produkt">
-          <div class="main_wrapper">
-            <div class="borderBox">
-              <h2 id="popup-film"></h2>
-
-            </div>
-            <img id="popup-plakat" src="" alt="">
-
-            <p id="popup-rating"></p>
-
-
-
-            <h3 class="instruktør">Instruktør:</h3>
-            <p id="popup-instruktør"> </p>
-
-
-            <h3 class="skuespillere">Skuespillere:</h3>
-            <p id="popup-skuespillere"></p>
-            <div class="row_wrapper">
-
-              <h3 class="spilletid">Spilletid:</h3>
-              <p id="popup-spilletid"></p>
-            </div>
-
-            <h3 class="plot-txt">Plot:</h3>
-            <p id="popup-beskrivelse"></p>
-
-            <h3 class="år">Udgivelsesår:</h3>
-            <p id="popup-op"> </p>
-
-
-            <h3 class="produk">Produktionsselskab:</h3>
-            <p id="popup-produktion"></p>
-
-
-
-
-            <!-- FontAwesome ikon for Kopier-Link knappen, som placeres ud fra Main.wrappers relative - brug right istedet for left. -->
-
-            <div class="share"><i class="far fa-copy"></i>
-            </div>
-
-            <!-- FontAwesome ikon for Luk popup-knap, som placeres ud fra Main.wrappers relative - brug right istedet for left. -->
-            <div class="luk"><i class="far fa-window-close"></i></div>
-          </div>
-
-
-
-        </article>
-      </section>
-      <section class="data-container" id="main"></section>
-
-
-      <!-- Template for vores produkt, der gentages på forsiden -->
-
-      <template>
-        <article id="produkt">
-          <img src="" alt="">
-        </article>
-      </template>
-
-
-      <footer id="footer">
-        <div class="link-wrap">
-          <a href="#top">Til toppen</a></div>
-      </footer>
     </div>
-  </div>
 
 
 
-  <script>
-    /*Forskellige constanter og variable defineres. Også JSON bliver linket til her.*/
-    const container = document.querySelector(".data-container");
-    const template = document.querySelector("template");
-    const detalje = document.querySelector("#detalje");
-    let produkter;
-    let allefilm = [];
-    let filter = "alle";
+    <script>
+        /*Forskellige constanter og variable defineres. Også JSON bliver linket til her.*/
+        const container = document.querySelector(".data-container");
+        const template = document.querySelector("template");
+        const detalje = document.querySelector("#detalje");
+        let produkter;
+        let allefilm = [];
+        let filter = "alle";
 
-    const id = "1m9ddpu_jXgZ2MrUp_d2JgQTWyonYcKFc9W1rdv1TdKQ";
-    const url = "https://spreadsheets.google.com/feeds/list/" + id + "/1/public/values?alt=json"
+        const id = "1m9ddpu_jXgZ2MrUp_d2JgQTWyonYcKFc9W1rdv1TdKQ";
+        const url = "https://spreadsheets.google.com/feeds/list/" + id + "/1/public/values?alt=json"
 
-    console.log("JSONData link:", url);
-    document.addEventListener("DOMContentLoaded", getJson);
-
-
-
-    /* Funktionen henter vores data fra ovenstående URL, herefter vises henvises til næste funktion */
-    async function getJson() {
-
-      const jsonData = await fetch(url);
-      produkter = await jsonData.json();
-      visRetter();
-      addEventListenersToButtons();
-    }
+        console.log("JSONData link:", url);
+        document.addEventListener("DOMContentLoaded", getJson);
 
 
 
-    /* Funktion som viser de forskellige film i main-grid - Disse henviser enkeltvis til deres produkt */
-    function visRetter() {
-      container.innerHTML = "";
-      antal = produkter.feed.entry.length;
+        /* Funktionen henter vores data fra ovenstående URL, herefter vises henvises til næste funktion */
+        async function getJson() {
 
-      produkter.feed.entry.forEach(produkt => {
-        if (filter == "alle" || filter == produkt.gsx$genre.$t) {
-          let klon = template.cloneNode(true).content;
-
-          klon.querySelector("img").src = "img/" + produkt.gsx$cover.$t + "/plakat.jpg";
-          klon.querySelector("img").alt = `Plakat af filmen: ${produkt.gsx$titel.$t};`
-          klon.querySelector("#produkt").addEventListener("click", () => visDetalje(produkt));
-          container.appendChild(klon);
+            const jsonData = await fetch(url);
+            produkter = await jsonData.json();
+            visRetter();
+            addEventListenersToButtons();
         }
-      })
-    }
 
 
 
-    /* Eventlisteners på menu-knapper */
-    function addEventListenersToButtons() {
-      document.querySelectorAll(".filter").forEach(elm => {
-        elm.addEventListener("click", filtrering);
-      })
-    }
+        /* Funktion som viser de forskellige film i main-grid - Disse henviser enkeltvis til deres produkt */
+        function visRetter() {
+            container.innerHTML = "";
+            antal = produkter.feed.entry.length;
+
+            produkter.feed.entry.forEach(produkt => {
+                if (filter == "alle" || filter == produkt.gsx$genre.$t) {
+                    let klon = template.cloneNode(true).content;
+
+                    klon.querySelector("img").src = "img/" + produkt.gsx$cover.$t + "/plakat.jpg";
+                    klon.querySelector("img").alt = `Plakat af filmen: ${produkt.gsx$titel.$t};`
+                    klon.querySelector("#produkt").addEventListener("click", () => visDetalje(produkt));
+                    container.appendChild(klon);
+                }
+            })
+        }
 
 
 
-    /* Filterering efter genre, bestemt ud fra Dataset - derefter visning af denne kategori */
-    function filtrering() {
-      filter = this.dataset.genre;
-      document.querySelector("h1").textContent = this.textContent;
-      document.querySelectorAll(".filter").forEach(elm => {
-        elm.classList.remove("valgt");
-      })
-      this.classList.add("valgt")
-      visRetter();
-      console.log("Filtreres efter Genren;", filter);
-
-    }
+        /* Eventlisteners på menu-knapper */
+        function addEventListenersToButtons() {
+            document.querySelectorAll(".filter").forEach(elm => {
+                elm.addEventListener("click", filtrering);
+            })
+        }
 
 
 
-    /* Popup visning af enkelt-film valgt ud fra id */
-    function visDetalje(produkt) {
-      const klon = template.cloneNode(true).content;
-      detalje.classList.remove("skjul");
-      detalje.querySelector(".luk").addEventListener("click", () => detalje.classList.add("skjul"));
-      document.getElementById("overskrift").style.display = "none";
+        /* Filterering efter genre, bestemt ud fra Dataset - derefter visning af denne kategori */
+        function filtrering() {
+            filter = this.dataset.genre;
+            document.querySelector("h1").textContent = this.textContent;
+            document.querySelectorAll(".filter").forEach(elm => {
+                elm.classList.remove("valgt");
+            })
+            this.classList.add("valgt")
+            visRetter();
+            console.log("Filtreres efter Genren;", filter);
 
-
-      console.log("Viser pop-up for", produkt.gsx$titel.$t)
-
-      document.querySelector("#detalje #popup-film").textContent = produkt.gsx$titel.$t;
-      document.querySelector("#detalje #popup-instruktør").textContent = `${produkt.gsx$instuktør.$t}`
-      document.querySelector("#detalje #popup-beskrivelse").textContent = `${produkt.gsx$plot.$t}`
-      document.querySelector("#detalje #popup-op").textContent = `${produkt.gsx$år.$t}`
-      document.querySelector("#detalje #popup-spilletid").textContent = `${produkt.gsx$tid.$t}`
-      document.querySelector("#detalje #popup-skuespillere").textContent = `${produkt.gsx$cast.$t}`
-      document.querySelector("#detalje #popup-produktion").textContent = `${produkt.gsx$prod.$t}`
-      document.querySelector("#detalje #popup-rating").textContent =
-        `Stjerner: ${produkt.gsx$stjerner.$t};`
-      document.querySelector("#detalje img").src = "img/" + produkt.gsx$cover.$t + "/plakat.jpg";
-      document.querySelector("#detalje img").alt = `Plakat af filmen: ${produkt.gsx$titel.$t}`
-
-      container.appendChild(klon);
-      window.scrollTo(0, 0);
-    }
+        }
 
 
 
-    /* OFF Canvas-menuen til mobil - Content får tildelt marginLeft og menu får tildelt width */
-    function openNav() {
-      document.getElementById("menu").style.width = "250px";
-      document.getElementById("wrapper").style.marginLeft = "250px";
-      console.log("Der åbnes for Mobil sidebar");
-    }
+        /* Popup visning af enkelt-film valgt ud fra id */
+        function visDetalje(produkt) {
+            const klon = template.cloneNode(true).content;
+            detalje.classList.remove("skjul");
+            detalje.querySelector(".luk").addEventListener("click", () => detalje.classList.add("skjul"));
+            document.getElementById("overskrift").style.display = "none";
 
-    /* OFF Canvas-menuen til mobil - MarginLeft og Width fjernes igen */
-    function closeNav() {
-      document.getElementById("menu").style.width = "0";
-      document.getElementById("wrapper").style.marginLeft = "0";
-      console.log("Mobil sidebar lukkes igen");
-    }
-  </script>
+
+            console.log("Viser pop-up for", produkt.gsx$titel.$t)
+
+            document.querySelector("#detalje #popup-film").textContent = produkt.gsx$titel.$t;
+            document.querySelector("#detalje #popup-instruktør").textContent = `Instruktør: ${produkt.gsx$instuktør.$t}`
+            document.querySelector("#detalje #popup-beskrivelse").textContent += `${produkt.gsx$plot.$t}`
+            document.querySelector("#detalje #popup-op").textContent = `Udgivelsesår: ${produkt.gsx$år.$t}`
+            document.querySelector("#detalje #popup-spilletid").textContent = `Spilletid: ${produkt.gsx$tid.$t}`
+            document.querySelector("#detalje #popup-skuespillere").textContent = `Skuespillere: ${produkt.gsx$cast.$t}`
+            document.querySelector("#detalje #popup-produktion").textContent = `Produktionsselskab: ${produkt.gsx$prod.$t}`
+            document.querySelector("#detalje #popup-rating").textContent = `Stjerner: ${produkt.gsx$stjerner.$t};`
+            document.querySelector("#detalje img").src = "img/" + produkt.gsx$cover.$t + "/plakat.jpg";
+            document.querySelector("#detalje img").alt = `Plakat af filmen: ${produkt.gsx$titel.$t}`
+
+
+            if (produkt.gsx$stjerner.$t == 1) {
+                document.querySelector("#detalje #star1").classList.add("yellow");
+                console.log("1 stjerne");
+
+            } else if (produkt.gsx$stjerner.$t == 2) {
+                document.querySelector("#detalje #star1").classList.add("yellow");
+                document.querySelector("#detalje #star2").classList.add("yellow");
+                console.log("2 stjerne");
+
+            } else if (produkt.gsx$stjerner.$t == 3) {
+                document.querySelector("#detalje #star1").classList.add("yellow");
+                document.querySelector("#detalje #star2").classList.add("yellow");
+                document.querySelector("#detalje #star3").classList.add("yellow");
+                console.log("3 stjerne");
+
+
+            } else if (produkt.gsx$stjerner.$t == 4) {
+                document.querySelector("#detalje #star1").classList.add("yellow");
+                document.querySelector("#detalje #star2").classList.add("yellow");
+                document.querySelector("#detalje #star3").classList.add("yellow");
+                document.querySelector("#detalje #star4").classList.add("yellow");
+                console.log("4 stjerne");
+
+            } else if (produkt.gsx$stjerner.$t == 5) {
+                document.querySelector("#detalje #star1").classList.add("yellow");
+                document.querySelector("#detalje #star2").classList.add("yellow");
+                document.querySelector("#detalje #star3").classList.add("yellow");
+                document.querySelector("#detalje #star4").classList.add("yellow");
+                document.querySelector("#detalje #star5").classList.add("yellow");
+                console.log("5 stjerne");
+
+
+            } else {
+                document.querySelector("#detalje #star1").classList.add("white");
+                document.querySelector("#detalje #star2").classList.add("white");
+                document.querySelector("#detalje #star3").classList.add("white");
+                document.querySelector("#detalje #star4").classList.add("white");
+                document.querySelector("#detalje #star5").classList.add("white");
+                console.log("0 stjerne");
+
+            }
+
+            container.appendChild(klon);
+            window.scrollTo(0, 0);
+
+        }
+
+
+
+
+        /* OFF Canvas-menuen til mobil - Content får tildelt marginLeft og menu får tildelt width */
+        function openNav() {
+            document.getElementById("menu").style.width = "250px";
+            document.getElementById("wrapper").style.marginLeft = "250px";
+            console.log("Der åbnes for Mobil sidebar");
+        }
+
+        /* OFF Canvas-menuen til mobil - MarginLeft og Width fjernes igen */
+        function closeNav() {
+            document.getElementById("menu").style.width = "0";
+            document.getElementById("wrapper").style.marginLeft = "0";
+            console.log("Mobil sidebar lukkes igen");
+        }
+
+    </script>
 </body>
 
 </html>
