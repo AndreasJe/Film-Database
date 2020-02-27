@@ -397,12 +397,7 @@
             left: 5px;
         }
 
-        #popup-op {
-            position: inherit;
-            margin: 0;
-            top: 280px;
-            margin-left: 15%;
-        }
+
 
         /* -----------------------------------------TEKST STYLING---------------------- */
 
@@ -410,7 +405,6 @@
         p {
             color: white;
             font-family: 'Montserrat';
-            font-size: 3vw;
             font-weight: 300;
         }
 
@@ -442,7 +436,6 @@
             color: white;
             font-family: 'Montserrat';
             font-weight: 600;
-            font-size: 3vw;
         }
 
 
@@ -476,21 +469,7 @@
 
 
 
-            .år {
-                display: none;
-            }
 
-            #popup-op {
-                display: none;
-            }
-
-            .produk {
-                display: none;
-            }
-
-            #popup-produktion {
-                display: none;
-            }
 
 
             /* Styling af copy link knappen i popuppen */
@@ -710,14 +689,63 @@
             #detalje .main_wrapper {
                 position: relative;
                 width: 80vw;
+                grid-template-columns: 25% 25% 25% 25%;
 
             }
 
 
 
+
             /* Plakatens i popuppen */
 
-            #detalje #popup-plakat {}
+            #detalje img {
+                height: 40vh;
+            }
+
+            #detalje .titel {
+
+
+                font-size: 2rem;
+
+            }
+
+            #detalje .pic {}
+
+
+            #detalje #stars {}
+
+            #detalje .info1 {
+
+                font-size: 1rem;
+
+            }
+
+            #detalje .info2 {
+                font-size: 1rem;
+            }
+
+            #detalje .info3 {
+                font-size: 1rem;
+            }
+
+            #detalje .info4 {
+                font-size: 1rem;
+
+                display: block;
+
+            }
+
+            #detalje .info5 {
+
+                font-size: 1rem;
+                display: block;
+
+
+            }
+
+            #detalje .info6 {
+                font-size: 1rem;
+            }
 
             .overskrift {
                 margin-left: 20vw;
@@ -746,16 +774,6 @@
         }
 
 
-        /* Pop-up elementer */
-
-        #popup-film {
-            border-bottom: 4px solid white;
-
-            margin-top: 25px;
-            margin-bottom: 40px;
-            padding: 0;
-            font-size: 3vw;
-        }
 
 
 
@@ -777,6 +795,7 @@
                 margin-right: 0vw;
                 margin-left: 20%;
                 padding: 0vw;
+                height: 80vh;
             }
 
 
@@ -793,30 +812,31 @@
 
 
 
+
             }
 
+
+            /*-------------------indhold i pop up styles til mediaq------------------------------*/
             #detalje .titel {
                 margin: 0 auto;
                 margin-left: 0px;
-                grid-column: 2 / span 1;
+                grid-column: 3 / span 2;
                 grid-row: 1;
-                border-bottom: 0.2rem solid white;
-                text-align: center;
+                text-align: left;
                 padding: 1rem;
 
                 padding-top: 0.5rem;
-                font-size: 3rem;
-                height: 10rem;
+                font-size: 1rem;
+                height: 4rem;
             }
 
             #detalje .pic {
                 margin: 0 auto;
-                margin-top: 4rem;
-                grid-column: 1 / span 1;
+                margin-top: 1rem;
+                grid-column: 1 / span 2;
                 grid-row: 1 / span 2;
                 width: 100%;
                 padding-top: 1rem;
-                ;
 
             }
 
@@ -834,8 +854,8 @@
             }
 
             #detalje .info2 {
-                grid-column: 1 / span 1;
-                grid-row: 3;
+                grid-column: 2 / span 1;
+                grid-row: 4;
                 font-size: 1rem;
                 padding: 1;
                 padding-top: 0;
@@ -849,11 +869,11 @@
 
             #detalje .info3 {
                 grid-column: 2 / span 1;
-                grid-row: 1;
+                grid-row: 2;
                 font-size: 1rem;
                 padding: 1rem;
 
-                padding-top: 12rem;
+                padding-top: 0rem;
                 font-size: 1.5rem;
 
 
@@ -886,8 +906,8 @@
             }
 
             #detalje .info6 {
-                grid-column: 2 / span 1;
-                grid-row: 2 / span 3;
+                grid-column: 2 / span 3;
+                grid-row: 3 / span 3;
                 margin-top: 0px;
                 margin: 0 auto;
                 margin-left: 0;
@@ -989,22 +1009,6 @@
                 }
             }
 
-            /* Pop-up elementer */
-
-            #popup-film {
-                text-align: left;
-                border-bottom: 4px solid white;
-                text-transform: uppercase;
-                width: 50%;
-                margin-top: 25px;
-                margin-bottom: 40px;
-                margin-right: auto;
-                margin-left: 31%;
-                padding: 0;
-                font-family: 'Montserrat';
-                font-weight: 900;
-                font-size: 3vw;
-            }
 
         }
 
