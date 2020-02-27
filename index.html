@@ -352,7 +352,7 @@
 
         #detalje .info6 {
             grid-column: 1 / span 2;
-            grid-row: 7;
+            grid-row: 6;
             margin-top: 0px;
             margin: 0 auto;
             font-size: 2.5rem;
@@ -1256,11 +1256,11 @@
             console.log("Viser pop-up for", produkt.gsx$titel.$t)
 
             document.querySelector("#detalje #popup-film").textContent = produkt.gsx$titel.$t;
-            document.querySelector("#detalje #popup-instruktør").textContent = `Instruktør: ${produkt.gsx$instuktør.$t}`
+            document.querySelector("#detalje #popup-instruktør").textContent = `${produkt.gsx$instuktør.$t}`
             document.querySelector("#detalje #popup-beskrivelse").textContent += `${produkt.gsx$plot.$t}`
             document.querySelector("#detalje #popup-op").textContent = `Udgivelsesår: ${produkt.gsx$år.$t}`
-            document.querySelector("#detalje #popup-spilletid").textContent = `Spilletid: ${produkt.gsx$tid.$t}`
-            document.querySelector("#detalje #popup-skuespillere").textContent = `Skuespillere: ${produkt.gsx$cast.$t}`
+            document.querySelector("#detalje #popup-spilletid").textContent = `${produkt.gsx$tid.$t}`
+            document.querySelector("#detalje #popup-skuespillere").textContent = `${produkt.gsx$cast.$t}`
             document.querySelector("#detalje #popup-produktion").textContent = `Produktionsselskab: ${produkt.gsx$prod.$t}`
             document.querySelector("#detalje img").src = "img/" + produkt.gsx$cover.$t + "/plakat.jpg";
             document.querySelector("#detalje img").alt = `Plakat af filmen: ${produkt.gsx$titel.$t}`
