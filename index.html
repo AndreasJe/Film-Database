@@ -251,11 +251,12 @@
 
         /*-----------BILLEDE, RATING, SPILLETID OG INSTRUTØR-------*/
 
-        /* De to ovenstående grid properties bestemmer hvor i griddet, elementet er placeret. Info1 fylder altså 1 og span'er over i 2. kolonne ud, men kun i den første række*/
+
         #detalje .titel {
             margin: 0 auto;
             margin-top: 1rem;
             margin-bottom: 0.6rem;
+            /* De to ovenstående grid properties bestemmer hvor i griddet, elementet er placeret. Info1 fylder altså 1 og span'er over i 2. kolonne ud, men kun i den første række*/
             grid-column: 1 / span 2;
             grid-row: 2;
 
@@ -695,7 +696,10 @@
 
             /* Plakatens i popuppen */
 
-            #detalje img {}
+            #detalje img {
+                max-height: 360px;
+                max-width: 100%;
+            }
 
             #detalje .titel {
 
@@ -880,7 +884,7 @@
                 grid-row: 3;
                 font-size: 1rem;
                 padding: 1;
-                margin-top: 10rem;
+                margin-top: 6rem;
                 padding-top: 8rem;
                 padding-bottom: 0;
                 margin-left: 0;
