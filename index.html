@@ -281,7 +281,7 @@
         #detalje #stars {
             margin: 0 auto;
             grid-column: 1 / span 1;
-            grid-row: 6 / span 1;
+            grid-row: 5 / span 1;
             width: 100%;
             padding-top: 1rem;
             padding-left: 1rem;
@@ -689,7 +689,9 @@
             #detalje .main_wrapper {
                 position: relative;
                 width: 80vw;
-                grid-template-columns: 25% 25% 25% 25%;
+                grid-template-columns: 20% 20% 30% 30%;
+                grid-template-rows: 5%;
+
 
             }
 
@@ -817,32 +819,38 @@
 
 
             /*-------------------indhold i pop up styles til mediaq------------------------------*/
+
+            /*-------------------overskrift----------------------------------------*/
+
             #detalje .titel {
                 margin: 0 auto;
-                margin-left: 0px;
-                grid-column: 3 / span 2;
+                margin-left: 0vw;
+                grid-column: 2 / span 3;
                 grid-row: 1;
                 text-align: left;
                 padding: 1rem;
 
                 padding-top: 0.5rem;
                 font-size: 1rem;
-                height: 4rem;
+                height: 2rem;
             }
+
+            /*-------------------billede----------------------------------------*/
 
             #detalje .pic {
                 margin: 0 auto;
                 margin-top: 1rem;
                 grid-column: 1 / span 2;
-                grid-row: 1 / span 2;
+                grid-row: 1 / span 6;
                 width: 100%;
                 padding-top: 1rem;
 
             }
 
+            /*-------------------instruktør----------------------------------------*/
             #detalje .info1 {
                 grid-column: 1 / span 1;
-                grid-row: 4;
+                grid-row: 7;
                 font-size: 1rem;
                 padding: 1;
                 margin-left: 0;
@@ -852,10 +860,13 @@
 
 
             }
+
+
+            /*-------------------Spilletid----------------------------------------*/
 
             #detalje .info2 {
                 grid-column: 2 / span 1;
-                grid-row: 4;
+                grid-row: 6;
                 font-size: 1rem;
                 padding: 1;
                 padding-top: 0;
@@ -867,8 +878,10 @@
 
             }
 
+            /*-------------------Skuespiller----------------------------------------*/
+
             #detalje .info3 {
-                grid-column: 2 / span 1;
+                grid-column: 2 / span 2;
                 grid-row: 2;
                 font-size: 1rem;
                 padding: 1rem;
@@ -880,10 +893,12 @@
 
             }
 
+            /*-------------------prod. selskab----------------------------------------*/
+
             #detalje .info4 {
 
                 grid-column: 1 / span 1;
-                grid-row: 5;
+                grid-row: 8;
                 font-size: 1rem;
                 margin: 0 auto;
                 margin-left: 0;
@@ -892,10 +907,12 @@
 
 
             }
+
+            /*-------------------udgivelsesår----------------------------------------*/
 
             #detalje .info5 {
-                grid-column: 1 / span 1;
-                grid-row: 6;
+                grid-column: 2 / span 1;
+                grid-row: 7;
                 margin: 0 auto;
                 font-size: 1rem;
                 margin-left: 0;
@@ -905,8 +922,10 @@
 
             }
 
+            /*-------------------plot----------------------------------------*/
+
             #detalje .info6 {
-                grid-column: 2 / span 3;
+                grid-column: 2 / span 2;
                 grid-row: 3 / span 3;
                 margin-top: 0px;
                 margin: 0 auto;
@@ -914,6 +933,19 @@
                 font-size: 1.5rem;
                 padding: 1rem;
 
+            }
+
+            /* Styling af copy link knappen i popuppen */
+            .share {
+                grid-column: 3 / span 1;
+                grid-row: 1 / span 1;
+                font-size: 300%;
+            }
+
+            /* Styling af luk knappen i popuppen */
+            .luk {
+                grid-column: 4 / span 1;
+                grid-row: 1 / span 1;
             }
 
 
@@ -1230,7 +1262,6 @@
             document.querySelector("#detalje #popup-spilletid").textContent = `Spilletid: ${produkt.gsx$tid.$t}`
             document.querySelector("#detalje #popup-skuespillere").textContent = `Skuespillere: ${produkt.gsx$cast.$t}`
             document.querySelector("#detalje #popup-produktion").textContent = `Produktionsselskab: ${produkt.gsx$prod.$t}`
-            document.querySelector("#detalje #popup-rating").textContent = `Stjerner: ${produkt.gsx$stjerner.$t};`
             document.querySelector("#detalje img").src = "img/" + produkt.gsx$cover.$t + "/plakat.jpg";
             document.querySelector("#detalje img").alt = `Plakat af filmen: ${produkt.gsx$titel.$t}`
 
