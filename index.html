@@ -702,7 +702,8 @@
             }
 
             #detalje .titel {
-
+                padding-top: 0;
+                margin-top: 0;
                 grid-column: 2 / span 2;
                 grid-row: 1;
                 font-size: 2rem;
@@ -712,10 +713,13 @@
             #detalje .pic {
                 grid-column: 1 / span 1;
                 grid-row: 1 / span 6;
+                padding-top: 2.5rem;
             }
 
 
             #detalje #stars {}
+
+            /*-------------------instruktør----------------------------------------*/
 
             #detalje .info1 {
                 grid-column: 1 / span 1;
@@ -724,17 +728,25 @@
 
             }
 
+            /*-------------------Spilletid----------------------------------------*/
+
             #detalje .info2 {
                 grid-column: 1 / span 1;
                 grid-row: 3;
                 font-size: 1rem;
+                padding-top: 3rem;
             }
+
+            /*-------------------Skuespiller----------------------------------------*/
 
             #detalje .info3 {
                 grid-column: 2 / span 2;
                 grid-row: 2;
                 font-size: 1rem;
+                padding-top: 6rem;
             }
+
+            /*-------------------prod. selskab----------------------------------------*/
 
             #detalje .info4 {
                 grid-column: 1 / span 1;
@@ -745,8 +757,10 @@
 
             }
 
+            /*-------------------udgivelsesår----------------------------------------*/
+
             #detalje .info5 {
-                grid-column: 2 / span 1;
+                grid-column: 3 / span 1;
                 grid-row: 6;
                 font-size: 1rem;
                 display: block;
@@ -754,10 +768,21 @@
 
             }
 
+            /*-------------------beskrivelse----------------------------------------*/
+
             #detalje .info6 {
                 grid-column: 2 / span 3;
                 grid-row: 3 / span 4;
-                font-size: 0.8rem;
+                font-size: 1.2rem;
+                padding-top: 1rem;
+                padding-right: 3rem;
+            }
+
+            /* Styling af luk knappen i popuppen */
+            .luk {
+                grid-column: 4 / span 1;
+                grid-row: 1 / span 1;
+                margin-left: 6rem;
             }
 
             .overskrift {
