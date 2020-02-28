@@ -1315,6 +1315,7 @@
 
             if (produkt.gsx$stjerner.$t == 1) {
                 document.querySelector("#detalje #star1").classList.add("yellow");
+
                 console.log("1 stjerne");
 
             } else if (produkt.gsx$stjerner.$t == 2) {
@@ -1354,13 +1355,24 @@
                 console.log("0 stjerne");
 
             }
-
+            document.querySelector(".luk").addEventListener("click", resetStars)
             container.appendChild(klon);
             window.scrollTo(0, 0);
 
         }
 
-
+        function resetStars() {
+            document.querySelector("#detalje #star1").classList.remove("yellow");
+            document.querySelector("#detalje #star2").classList.remove("yellow");
+            document.querySelector("#detalje #star3").classList.remove("yellow");
+            document.querySelector("#detalje #star4").classList.remove("yellow");
+            document.querySelector("#detalje #star5").classList.remove("yellow");
+            document.querySelector("#detalje #star1").classList.remove("white");
+            document.querySelector("#detalje #star2").classList.remove("white");
+            document.querySelector("#detalje #star3").classList.remove("white");
+            document.querySelector("#detalje #star4").classList.remove("white");
+            document.querySelector("#detalje #star5").classList.remove("white");
+        }
 
 
         /* OFF Canvas-menuen til mobil - Content får tildelt marginLeft og menu får tildelt width */
